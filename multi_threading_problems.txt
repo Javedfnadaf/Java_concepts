@@ -74,3 +74,50 @@ public class Main {
         System.out.println("Main thread finished");
     }
 }
+
+
+
+example 3
+
+class NumberThread extends Thread {
+    public void run() {
+        try {
+            for (int i = 1; i <= 3; i++) {
+                System.out.println(i);
+                Thread.sleep(1000); // 1 second delay
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class LetterThread extends Thread {
+    public void run() {
+        try {
+            for (char ch = 'A'; ch <= 'C'; ch++) {
+                System.out.println(ch);
+                Thread.sleep(1000); // 1 second delay
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        NumberThread t1 = new NumberThread();
+        LetterThread t2 = new LetterThread();
+
+        t1.start();
+
+        try {
+            t1.join(); // wait for t1 to finish
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        t2.start(); // starts after t1 completes
+    }
+}
