@@ -1,0 +1,38 @@
+                 JDBC
+DriverManager: is a class in Java that is used to establish connection between a Java application and a database.
+
+Connection: is an interface in Java that represents the connection between a Java application and a database.
+
+
+Statement: is an interface used to execute SQL queries in JDBC.
+
+
+ResultSet: is an object that holds the data returned from the database and is used to read the data row by row.
+
+
+URL" is the address of the database that tells Java where the database is located.
+
+             full example with code 
+
+
+  import java.sql.*;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/test", "root", "password");
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM student");
+
+            while (rs.next()) {
+                System.out.println(rs.getInt(1) + " " + rs.getString(2));
+            }
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
